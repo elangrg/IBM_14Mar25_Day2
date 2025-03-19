@@ -11,7 +11,6 @@ namespace IBM_14Mar25_Day2
 
         static void Main()
         {
-
             IStudent objstd;
 
             IBMStudent iBMStudent = new IBMStudent();
@@ -20,8 +19,6 @@ namespace IBM_14Mar25_Day2
             Console.WriteLine(iBMStudent.GetFullName());
 
             objstd = iBMStudent;
-
-
             Console.WriteLine( objstd.GetFullName() );  
 
         }

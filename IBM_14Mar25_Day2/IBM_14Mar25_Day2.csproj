@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>IBM_14Mar25_Day2.InterfaceEg</StartupObject>
+    <StartupObject>IBM_14Mar25_Day2.PropertyIndexerEg</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -46,10 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConstructorEg.cs" />
     <Compile Include="InterfaceEg.cs" />
     <Compile Include="OOPSEg.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyIndexerEg.cs" />
     <Compile Include="VariablesDemo.cs" />
   </ItemGroup>
   <ItemGroup>
