@@ -81,7 +81,5 @@ namespace IBM_14Mar25_Day2
             get { return _Skills[index]; }
             set { _Skills[index] = value; }
         }
-
-
     }
 }
