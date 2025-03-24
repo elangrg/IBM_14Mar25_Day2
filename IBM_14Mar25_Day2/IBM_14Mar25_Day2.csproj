@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>IBM_14Mar25_Day2.GenericEg</StartupObject>
+    <StartupObject>IBM_14Mar25_Day2.DelegateEg</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConstructorEg.cs" />
+    <Compile Include="DelegateEg.cs" />
     <Compile Include="DestructorEg.cs" />
     <Compile Include="ExceptionHandlingEg.cs" />
     <Compile Include="GenericEg.cs" />

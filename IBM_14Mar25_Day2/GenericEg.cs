@@ -21,9 +21,9 @@ namespace IBM_14Mar25_Day2
 
             Console.WriteLine(Min<string>("xyz", 100.ToString()));
 
-            MyClass c= new MyClass();
+            //MyClass c= new MyClass();
 
-            GenericMethodSyntax<int, MyClass, int>(100,c );
+            //GenericMethodSyntax<int, MyClass, int>(100,c );
 
 
             Console.ReadKey();
