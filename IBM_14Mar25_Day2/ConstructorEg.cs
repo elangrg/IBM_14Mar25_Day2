@@ -33,7 +33,7 @@ namespace IBM_14Mar25_Day2
         }
     }
 
-    class AUDIProduct:Product
+    class AUDIProduct:ProductEg
     {
         public AUDIProduct():base(1001,"AUDI X7")
         {
@@ -43,7 +43,7 @@ namespace IBM_14Mar25_Day2
 
     }
 
-    class Product
+    class ProductEg
     {
         public int ProductId;
         public string Name;
@@ -51,7 +51,7 @@ namespace IBM_14Mar25_Day2
         public string Category;
         public int Qty;
 
-        public Product()
+        public ProductEg()
         {
             this.ProductId = 0;
             this.Qty = 100;
@@ -60,7 +60,7 @@ namespace IBM_14Mar25_Day2
             this.Name = string.Empty;
         }
 
-        public Product(  int ProductId,string Name,string Description,
+        public ProductEg(  int ProductId,string Name,string Description,
          string Category,int Qty  ) 
         {
             this.ProductId =ProductId;
@@ -72,12 +72,12 @@ namespace IBM_14Mar25_Day2
         }
 
 
-        public Product(int ProductId, string Name):this()
+        public ProductEg(int ProductId, string Name):this()
         {
             this.ProductId = ProductId;
             this.Name = Name;
         }
-        public Product(int _ProductId, string _Name, string _Category) :this(_ProductId,_Name)
+        public ProductEg(int _ProductId, string _Name, string _Category) :this(_ProductId,_Name)
         {
             
             Category = _Category;
