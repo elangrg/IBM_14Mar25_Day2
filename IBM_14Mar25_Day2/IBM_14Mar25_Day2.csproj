@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>IBM_14Mar25_Day2.DelegateEg</StartupObject>
+    <StartupObject>IBM_14Mar25_Day2.Iterator_IEnum2Eg</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -46,12 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollectionsEg.cs" />
     <Compile Include="ConstructorEg.cs" />
     <Compile Include="DelegateEg.cs" />
     <Compile Include="DestructorEg.cs" />
+    <Compile Include="DotNet3FeaturesEg.cs" />
     <Compile Include="ExceptionHandlingEg.cs" />
+    <Compile Include="ExtensionMethodEg.cs" />
     <Compile Include="GenericEg.cs" />
     <Compile Include="InterfaceEg.cs" />
+    <Compile Include="Iterator_IEnum2Eg.cs" />
     <Compile Include="MethodEg.cs" />
     <Compile Include="OOPSEg.cs" />
     <Compile Include="Program.cs" />

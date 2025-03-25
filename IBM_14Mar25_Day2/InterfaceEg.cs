@@ -71,6 +71,13 @@ namespace IBM_14Mar25_Day2
         {
             return $" Explicit :  {FirstName} {LastName}";
         }
+
+
+        public override string ToString()
+        {
+            return $" studentID:{this.StudentId} FullName :{this._FirstName} {_LastName}";
+        }
+
     }
     
 
