@@ -70,5 +70,8 @@
     <None Include="App.config" />
     <None Include="Docs\13Mar2025IBM_Classflow.pptx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Docs\ScriptFoodDb.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
