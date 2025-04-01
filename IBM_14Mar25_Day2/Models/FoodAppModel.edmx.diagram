@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="37b9025d63764042a1a2003e560a7342" Name="Diagram1">
+        <EntityTypeShape EntityType="IBM14Mar25CWFDbModel.Category" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IBM14Mar25CWFDbModel.FoodItem" Width="1.5" PointX="5.375" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="IBM14Mar25CWFDbModel.FK_FoodItem_Category" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

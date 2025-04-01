@@ -36,7 +36,7 @@ namespace IBM_14Mar25_Day2
             {
                 Console.Clear();
 
-                Console.WriteLine("ADO.NET Intro using FoodItem \n\n\n0. Display All Food Items\n\n 1. Insert\n\n2. Update\n\n3. Delete\n\n4. Stored Proc call Get All FoodItems\n\n5. Get Food Item by ID \n\n-1. Exit \n\n\n\n");
+                Console.WriteLine("ADO.NET Intro using FoodItem \n\n\n0. Display All Food Items\n\n 1. Insert\n\n2. Update\n\n3. Delete\n\n4. Stored Proc call Get All FoodItems\n\n5. Get Food Item by ID \n\n6.Dataset Demo\n\n-1. Exit \n\n\n\n");
                 Console.Write("Enter Choice:");
                 choice = Console.ReadLine();
 
@@ -75,18 +75,117 @@ namespace IBM_14Mar25_Day2
 
                 }
 
+                if (choice == "6")
+                {
+                    DatasetEg(_cn);
+
+                }
+
+
             } while (choice != "-1");
 
 
         }
 
+        private static void DatasetEg(SqlConnection cn)
+        {
+
+            SqlDataAdapter _da = new SqlDataAdapter();
+
+            _da.SelectCommand = new SqlCommand();
+            _da.SelectCommand.CommandText = "select * from FoodItem ";
+            _da.SelectCommand.Connection = cn;
+            DataTable _dt = new DataTable();
+
+            _da.Fill(_dt);
+
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(@"FoodItemID  |FoodItemName        |Rate      |Vendor Name     ");
+            foreach (DataRow _drow in _dt.Rows)
+            {
+                Console.WriteLine($"{_drow[0].ToString().PadLeft(12, ' ')} |{_drow[1].ToString().PadRight(25, ' ')}|{_drow[3].ToString().PadLeft(10, ' ')}|{_drow[4].ToString().PadRight(20, ' ')}");
+            }
+
+            // Row State management
+
+            // RowState
+            Console.WriteLine(_dt.Rows[0].RowState);
+
+            DataRow _newRow = _dt.NewRow();
+            Console.WriteLine(_dt.Rows[0]); // DataRowState.Detached
+
+            _newRow["FoodItemName"] = "Item 1";
+            _newRow[2] = "Desc ...";
+            _newRow[3] = 1000;
+            _newRow["VendorName"] = "";
+
+            _newRow["CategoryID"] = 1;
+
+            _dt.Rows.Add(_newRow); // Add new row 
+
+            Console.WriteLine(_dt.Rows[0].RowState); // DataRowState.Added
+
+            DataRow _oldFoodItem = _dt.Select($"FoodItemID={1}")[0];
+            Console.WriteLine(_oldFoodItem.RowState); // DataRowState.Unchanged
+
+            _oldFoodItem[1] = "New Food Item Name ....";
+            Console.WriteLine(_oldFoodItem.RowState); // DataRowState.Modified
+
+            DataRow _DelFoodItem = _dt.Select($"FoodItemID={6}")[0];
+
+            _DelFoodItem.Delete();    // DataRowState.Deleted
+
+            _da.InsertCommand = new SqlCommand("INSERT INTO [FoodItem]([FoodItemName],[FoodItemDesc],[Rate],[VendorName],[SubCategory],[CategoryID])VALUES(@FoodName,@FoodItmDesc,@Rate,@VendorName,@SubCategory,@CategoryID)", cn);
+
+            _da.InsertCommand.Parameters.Add("@FoodName", SqlDbType.VarChar, 150).SourceColumn = "FoodItemName";
+            _da.InsertCommand.Parameters.Add("@FoodItmDesc", SqlDbType.VarChar, 150).SourceColumn = "FoodItemDesc";
+            _da.InsertCommand.Parameters.Add("@Rate", SqlDbType.Money).SourceColumn = "Rate";
+            _da.InsertCommand.Parameters.Add("@VendorName", SqlDbType.VarChar, 100).SourceColumn = "VendorName";
+            _da.InsertCommand.Parameters.Add("@SubCategory", SqlDbType.VarChar, 100).SourceColumn = "SubCategory";
+            _da.InsertCommand.Parameters.Add("@CategoryID", SqlDbType.VarChar, 100).SourceColumn = "CategoryID";
+
+
+            // Update Command 
+
+            _da.UpdateCommand = new SqlCommand("UPDATE [dbo].[FoodItem]   SET [FoodItemName] = @FoodName,[FoodItemDesc] = @FoodItmDesc,[Rate] = @Rate,[VendorName] = @VendorName,[SubCategory] = @SubCategory,[CategoryID] = @CategoryID WHERE FoodItemID=@FID", cn);
+
+            _da.UpdateCommand.Parameters.Add("@FoodName", SqlDbType.VarChar, 150).SourceColumn = "FoodItemName";
+            _da.UpdateCommand.Parameters.Add("@FoodItmDesc", SqlDbType.VarChar, 150).SourceColumn = "FoodItemDesc";
+            _da.UpdateCommand.Parameters.Add("@Rate", SqlDbType.Money).SourceColumn = "Rate";
+            _da.UpdateCommand.Parameters.Add("@VendorName", SqlDbType.VarChar, 100).SourceColumn = "VendorName";
+            _da.UpdateCommand.Parameters.Add("@SubCategory", SqlDbType.VarChar, 100).SourceColumn = "SubCategory";
+            _da.UpdateCommand.Parameters.Add("@CategoryID", SqlDbType.VarChar, 100).SourceColumn = "CategoryID";
+            _da.UpdateCommand.Parameters.Add("@FID", SqlDbType.VarChar, 100).SourceColumn = "FoodItemID";
+
+
+
+            _da.DeleteCommand = new SqlCommand("delete [dbo].[FoodItem]   WHERE FoodItemID=@FID", cn);
+            _da.DeleteCommand.Parameters.Add("@FID", SqlDbType.VarChar, 100).SourceColumn = "FoodItemID";
+
+
+            _da.ContinueUpdateOnError = true;
+
+            _da.Update(_dt);
+
+            if (_dt.HasErrors == false) { 
+                        Console.WriteLine("Database updated Successfully");
+
+                        _dt.AcceptChanges();
+                    }
+
+            //_dt.DefaultView.RowFilter=""
+
+
+
+        }
+
         private static void UpdateFoodItem(SqlConnection _cn)
-        {Console.Clear();
+        {
+            
+            Console.Clear();
             DisplayFoodItemsForEditorDelete(_cn);
 
-            
-
-          
+         
             Console.Write("Enter Food Item Id to Edit:");
            string choice = Console.ReadLine();
 
@@ -95,6 +194,7 @@ namespace IBM_14Mar25_Day2
 
             _cn.Open();
           var _dr=  _cmd.ExecuteReader();
+
             if (!_dr.HasRows)
             {
                 Console.WriteLine("Invalid Food Item ID, Record not found...");

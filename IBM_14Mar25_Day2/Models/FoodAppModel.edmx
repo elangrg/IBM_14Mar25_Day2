@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="IBM14Mar25CWFDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FoodItem">
+          <Key>
+            <PropertyRef Name="FoodItemID" />
+          </Key>
+          <Property Name="FoodItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FoodItemName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="FoodItemDesc" Type="varchar(max)" />
+          <Property Name="Rate" Type="money" Nullable="false" />
+          <Property Name="VendorName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="SubCategory" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_FoodItem_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="FoodItem" Type="Self.FoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="FoodItem">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetAllFoodItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetFoodItemNameByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fooditmID" Type="int" Mode="In" />
+          <Parameter Name="foodName" Type="varchar" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="IBM14Mar25CWFDbModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FoodItem" EntityType="Self.FoodItem" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FoodItem_Category" Association="Self.FK_FoodItem_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="FoodItem" EntitySet="FoodItem" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IBM14Mar25CWFDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FoodItems" Relationship="Self.FK_FoodItem_Category" FromRole="Category" ToRole="FoodItem" />
+        </EntityType>
+        <EntityType Name="FoodItem">
+          <Key>
+            <PropertyRef Name="FoodItemID" />
+          </Key>
+          <Property Name="FoodItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FoodItemName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FoodItemDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Rate" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="VendorName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SubCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_FoodItem_Category" FromRole="FoodItem" ToRole="Category" />
+        </EntityType>
+        <Association Name="FK_FoodItem_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="FoodItem" Type="Self.FoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="FoodItem">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IBM14Mar25CWFDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="FoodItems" EntityType="Self.FoodItem" />
+          <AssociationSet Name="FK_FoodItem_Category" Association="Self.FK_FoodItem_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="FoodItem" EntitySet="FoodItems" />
+          </AssociationSet>
+          <FunctionImport Name="GetFoodItemNameByID">
+            <Parameter Name="fooditmID" Mode="In" Type="Int32" />
+            <Parameter Name="foodName" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetFoodItems" ReturnType="Collection(IBM14Mar25CWFDbModel.GetFoodItems_Result)" />
+        </EntityContainer>
+        <ComplexType Name="GetFoodItems_Result">
+          <Property Type="Int32" Name="FoodItemID" Nullable="false" />
+          <Property Type="String" Name="FoodItemName" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="FoodItemDesc" Nullable="true" />
+          <Property Type="Decimal" Name="Rate" Nullable="false" Precision="19" />
+          <Property Type="String" Name="VendorName" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="SubCategory" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IBM14Mar25CWFDbModelStoreContainer" CdmEntityContainer="IBM14Mar25CWFDbEntities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="IBM14Mar25CWFDbModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FoodItems">
+            <EntityTypeMapping TypeName="IBM14Mar25CWFDbModel.FoodItem">
+              <MappingFragment StoreEntitySet="FoodItem">
+                <ScalarProperty Name="FoodItemID" ColumnName="FoodItemID" />
+                <ScalarProperty Name="FoodItemName" ColumnName="FoodItemName" />
+                <ScalarProperty Name="FoodItemDesc" ColumnName="FoodItemDesc" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetFoodItemNameByID" FunctionName="IBM14Mar25CWFDbModel.Store.GetFoodItemNameByID" />
+          <FunctionImportMapping FunctionImportName="GetFoodItems" FunctionName="IBM14Mar25CWFDbModel.Store.GetAllFoodItems">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IBM14Mar25CWFDbModel.GetFoodItems_Result">
+                <ScalarProperty Name="FoodItemID" ColumnName="FoodItemID" />
+                <ScalarProperty Name="FoodItemName" ColumnName="FoodItemName" />
+                <ScalarProperty Name="FoodItemDesc" ColumnName="FoodItemDesc" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

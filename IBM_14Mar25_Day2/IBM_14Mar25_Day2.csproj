@@ -33,11 +33,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>IBM_14Mar25_Day2.ADONET_Eg</StartupObject>
+    <StartupObject>IBM_14Mar25_Day2.ADONETEntityFrameworkEg</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ADONETEntityFrameworkEg.cs" />
     <Compile Include="ADONET_Eg.cs" />
     <Compile Include="CollectionsEg.cs" />
     <Compile Include="ConstructorEg.cs" />
@@ -60,6 +70,30 @@
     <Compile Include="LINQIntroEg.cs" />
     <Compile Include="LINQStandardOperEg.cs" />
     <Compile Include="MethodEg.cs" />
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>FoodAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FoodAppModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FoodAppModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FoodAppModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FoodAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FoodAppModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FoodAppModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FoodItem.cs">
+      <DependentUpon>FoodAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetFoodItems_Result.cs">
+      <DependentUpon>FoodAppModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="OOPSEg.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,9 +103,30 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Docs\13Mar2025IBM_Classflow.pptx" />
+    <EntityDeploy Include="Models\FoodAppModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FoodAppModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\FoodAppModel.edmx.diagram">
+      <DependentUpon>FoodAppModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Docs\ScriptFoodDb.txt" />
+    <Content Include="Models\FoodAppModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FoodAppModel.Context.cs</LastGenOutput>
+      <DependentUpon>FoodAppModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\FoodAppModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FoodAppModel.edmx</DependentUpon>
+      <LastGenOutput>FoodAppModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
