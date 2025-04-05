@@ -361,3 +361,24 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/IBM_14Mar25_Day2/Models/Category.cs
+/IBM_14Mar25_Day2/Models/FoodAppModel.Context.cs
+/IBM_14Mar25_Day2/Models/FoodAppModel.Context.tt
+/IBM_14Mar25_Day2/Models/FoodAppModel.cs
+/IBM_14Mar25_Day2/Models/FoodAppModel.Designer.cs
+/IBM_14Mar25_Day2/Models/FoodAppModel.edmx
+/IBM_14Mar25_Day2/Models/FoodAppModel.edmx.diagram
+/IBM_14Mar25_Day2/Models/FoodAppModel.tt
+/IBM_14Mar25_Day2/Models/FoodItem.cs
+/IBM_14Mar25_Day2/Models/GetFoodItems_Result.cs
+/IBM_14Mar25_Day2/ADONETEntityFrameworkEg.cs
+/IBM_14Mar25_Day2/ADONET_Eg.cs
+/IBM_14Mar25_Day2/ADONET_Eg.cs
+/IBM_14Mar25_Day2/ADONET_Eg.cs
+/IBM_14Mar25_Day2/App.config
+/IBM_14Mar25_Day2/IBM_14Mar25_Day2.csproj
+/IBM_14Mar25_Day2/packages.config
+/.gitignore
+/IBM_14Mar25_Day2/ADONET_Eg.cs
+/IBM_14Mar25_Day2/App.config
+/IBM_14Mar25_Day2/IBM_14Mar25_Day2.csproj
